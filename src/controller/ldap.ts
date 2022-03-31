@@ -9,7 +9,7 @@ function sleep(ms) {
 
 export async function checkPassword(user, password): Promise<any> {
     const server = `${ldapServer.host}:${ldapServer.port}`;
-    const ladpPromise = new Promise((resolve, reject) => {
+    const ldapPromise = new Promise((resolve, reject) => {
         isReachable(server).then(reachable => {
             if (!reachable) {
                 return resolve('timeout');
@@ -66,7 +66,7 @@ export async function checkPassword(user, password): Promise<any> {
         });
 
     });
-    const response = await Promise.race([ladpPromise, sleep(3000)]);
+    const response = await Promise.race([ldapPromise, sleep(3000)]);
     if (response === 'timeout') {
         return null
     } else if (response === 'invalid') {
@@ -75,3 +75,4 @@ export async function checkPassword(user, password): Promise<any> {
         return response;
     }
 }
+
