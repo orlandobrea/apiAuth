@@ -1,0 +1,23 @@
+version: "3.0"
+services:
+  redis:
+    container_name: redis 
+    image: redis:6.2
+    ports:
+      - 6379:6379
+  openldap:
+    container_name: ldap-server 
+    image: bitnami/openldap:2
+    ports:
+      - 1389:1389
+      - 1636:1636
+    volumes:
+      - ./docker/users.ldif:/ldifs/users.ldif
+  ldap-ui:
+    container_name: ldap-ui 
+    image: dnknth/ldap-ui
+    environment:
+      - LDAP_URL=ldap://ldap-server:1389/
+      - BASE_DN=dc=example,dc=org
+    ports:
+      - 5000:5000

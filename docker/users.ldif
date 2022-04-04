@@ -1,0 +1,48 @@
+# example.org
+dn: dc=example,dc=org
+objectClass: dcObject
+objectClass: organization
+dc: example
+o: example
+
+# users, example.org
+dn: ou=users,dc=example,dc=org
+objectClass: organizationalUnit
+ou: users
+
+# user1, users, example.org
+# password user1
+dn: uid=user1,ou=users,dc=example,dc=org
+cn: User1
+sn: userLastName
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: dXNlcjE=
+uid: user1
+uidNumber: 1000
+gidNumber: 1000
+homeDirectory: /home/user1
+givenName: userName
+mail: user@mail.com
+telephoneNumber: 123456
+
+
+#dn: cn=user1,ou=users,dc=example,dc=org
+#cn: User1
+#sn: Bar1
+#objectClass: inetOrgPerson
+#objectClass: posixAccount
+#objectClass: shadowAccount
+#userPassword:: dXNlcjE=
+#uid: user1
+#uidNumber: 1000
+#gidNumber: 1000
+#homeDirectory: /home/user1
+
+# readers, users, example.org
+dn: cn=readers,ou=users,dc=example,dc=org
+cn: readers
+objectClass: groupOfNames
+member: cn=user1,ou=users,dc=example,dc=org
+
